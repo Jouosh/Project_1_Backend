@@ -2,71 +2,60 @@ package dev.martin.entities;
 
 public class Meeting {
 
-    private int id;
-    private int organizer;
-    private int complaint;
-    private String meetingPlace;
-    private String meetingTime;
+    int meeting_id;
+    String description;
+    String place;
+    int time;
 
     public Meeting() {
     }
 
-    public Meeting(int id, int organizer, int complaint, String meetingPlace, String meetingTime) {
-        this.id = id;
-        this.organizer = organizer;
-        this.complaint = complaint;
-        this.meetingPlace = meetingPlace;
-        this.meetingTime = meetingTime;
+    public Meeting(int meeting_id, String description, String place, int time) {
+        this.meeting_id = meeting_id;
+        this.description = description;
+        this.place = place;
+        this.time = time;
     }
 
-    public int getId() {
-        return id;
+    public int getMeeting_id() {
+        return meeting_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setMeeting_id(int meeting_id) {
+        this.meeting_id = meeting_id;
     }
 
-    public int getOrganizer() {
-        return organizer;
+    public String getDescription() {
+        return description;
     }
 
-    public void setOrganizer(int organizer) {
-        this.organizer = organizer;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getComplaint() {
-        return complaint;
+    public String getPlace() {
+        return place;
     }
 
-    public void setComplaint(int complaint) {
-        this.complaint = complaint;
+    public void setPlace(String place) {
+        this.place = place;
     }
 
-    public String getMeetingPlace() {
-        return meetingPlace;
+    public int getTime() {
+        return time;
     }
 
-    public void setMeetingPlace(String meetingPlace) {
-        this.meetingPlace = meetingPlace;
-    }
-
-    public String getMeetingTime() {
-        return meetingTime;
-    }
-
-    public void setMeetingTime(String meetingTime) {
-        this.meetingTime = meetingTime;
+    public void setTime(int time) {
+        this.time = time;
     }
 
     @Override
     public String toString() {
         return "Meeting{" +
-                "id=" + id +
-                ", organizer=" + organizer +
-                ", complaint=" + complaint +
-                ", meetingPlace='" + meetingPlace + '\'' +
-                ", meetingTime='" + meetingTime + '\'' +
+                "meeting_id=" + meeting_id +
+                ", description='" + description + '\'' +
+                ", place='" + place + '\'' +
+                ", time=" + time +
                 '}';
     }
 }

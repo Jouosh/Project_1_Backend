@@ -2,64 +2,28 @@ package dev.martin.entities;
 
 public class Complaint {
 
-    private int id;
-    private int priority;
-    private int complainer;
-    private Status status;
-    private String type;
-    private String description;
+    int complaintId;
+    String description;
+    int meeting;
+    Status status;
 
     public Complaint() {
 
     }
 
-    public Complaint(int id, int priority, int complainer, Status status, String type, String description) {
-        this.id = id;
-        this.priority = priority;
-        this.complainer = complainer;
-        this.status = status;
-        this.type = type;
+    public Complaint(int complaintId, String description, int meeting, Status status) {
+        this.complaintId = complaintId;
         this.description = description;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getPriority() {
-        return priority;
-    }
-
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
-
-    public int getComplainer() {
-        return complainer;
-    }
-
-    public void setComplainer(int complainer) {
-        this.complainer = complainer;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
+        this.meeting = meeting;
         this.status = status;
     }
 
-    public String getType() {
-        return type;
+    public int getComplaintId() {
+        return complaintId;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setComplaintId(int complaintId) {
+        this.complaintId = complaintId;
     }
 
     public String getDescription() {
@@ -70,15 +34,30 @@ public class Complaint {
         this.description = description;
     }
 
+    public int getMeeting() {
+        return meeting;
+    }
+
+    public void setMeeting(int meeting) {
+        this.meeting = meeting;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Complaint{" +
-                "id=" + id +
-                ", priority=" + priority +
-                ", complainer=" + complainer +
-                ", status=" + status +
-                ", type='" + type + '\'' +
+                "complaintId=" + complaintId +
                 ", description='" + description + '\'' +
+                ", meeting=" + meeting +
+                ", status=" + status +
                 '}';
     }
+
 }
