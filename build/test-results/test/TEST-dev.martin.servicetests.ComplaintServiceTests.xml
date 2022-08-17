@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.martin.servicetests.ComplaintServiceTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-08-17T16:22:44" hostname="DESKTOP-N060D0A" time="0.026">
+  <properties/>
+  <testcase name="registered_complaints_must_have_a_description()" classname="dev.martin.servicetests.ComplaintServiceTests" time="0.026"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
