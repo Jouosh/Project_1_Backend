@@ -1,9 +1,7 @@
 package dev.martin.daotests;
 
-import dev.martin.data.ComplaintDAO;
-import dev.martin.data.ComplaintDAOPostgres;
-import dev.martin.entities.Complaint;
-import dev.martin.entities.Status;
+import dev.martin.data.MeetingDAO;
+import dev.martin.data.MeetingDAOPostgres;
 import dev.martin.utils.ConnectionUtil;
 import org.junit.jupiter.api.*;
 
@@ -12,9 +10,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class ComplaintDAOTests {
+public class MeetingDAOTests {
 
-    static ComplaintDAO complaintDAO = new ComplaintDAOPostgres();
+    static MeetingDAO meetingDAO = new MeetingDAOPostgres();
 
     @BeforeAll
     static public void setup() {
@@ -36,16 +34,6 @@ public class ComplaintDAOTests {
             //insert default fake meeting into meeting_test
             sql = "insert into meeting values (-1, 'No meeting assigned', 'This is fake', 0);";
             statement.execute(sql);
-
-            //create complaint table for use
-            sql = "create table complaint(\n" +
-                    "\tcomplaint_id serial primary key,\n" +
-                    "\tdescription varchar(500) not null,\n" +
-                    "\tmeeting int references meeting(meeting_id),\n" +
-                    "\tstatus varchar(10)\n" +
-                    ");";
-            statement.execute(sql);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -53,24 +41,17 @@ public class ComplaintDAOTests {
 
     @Test
     @Order(1)
-    void create_complaint_test() {
-        Complaint complaint = new Complaint(0, "A sewer gator came out of my toilet",
-                0, Status.PENDING);
-        Complaint savedComplaint = complaintDAO.createComplaint(complaint);
-        Assertions.assertNotEquals(0, savedComplaint.getComplaintId());
-    };
+    public void get_all_meetings_test() {
+        Assertions.assertEquals(0, this.meetingDAO.getAllMeetings().size());
+    }
 
     @AfterAll
-    static void teardown() {
+    public static void teardown() {
 
         try (Connection conn = ConnectionUtil.createConnection()) {
 
-            //Drop complaint table first, then meeting table
-            String sql = "drop table complaint";
+            String sql = "drop table meeting";
             Statement statement = conn.createStatement();
-            statement.execute(sql);
-
-            sql = "drop table meeting";
             statement.execute(sql);
 
         } catch(SQLException e) {
