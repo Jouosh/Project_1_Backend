@@ -2,7 +2,7 @@ package dev.martin.entities;
 
 public class Meeting {
 
-    int meeting_id;
+    int meetingId;
     String description;
     String place;
     int time;
@@ -10,19 +10,19 @@ public class Meeting {
     public Meeting() {
     }
 
-    public Meeting(int meeting_id, String description, String place, int time) {
-        this.meeting_id = meeting_id;
+    public Meeting(int meetingId, String description, String place, int time) {
+        this.meetingId = meetingId;
         this.description = description;
         this.place = place;
         this.time = time;
     }
 
-    public int getMeeting_id() {
-        return meeting_id;
+    public int getMeetingId() {
+        return meetingId;
     }
 
-    public void setMeeting_id(int meeting_id) {
-        this.meeting_id = meeting_id;
+    public void setMeetingId(int meetingId) {
+        this.meetingId = meetingId;
     }
 
     public String getDescription() {
@@ -52,7 +52,7 @@ public class Meeting {
     @Override
     public String toString() {
         return "Meeting{" +
-                "meeting_id=" + meeting_id +
+                "meeting_id=" + meetingId +
                 ", description='" + description + '\'' +
                 ", place='" + place + '\'' +
                 ", time=" + time +
