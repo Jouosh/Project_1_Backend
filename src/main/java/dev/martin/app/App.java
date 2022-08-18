@@ -12,7 +12,10 @@ public class App {
 
     public static void main(String args[]) {
 
-        Javalin app = Javalin.create();
+        Javalin app = Javalin.create(config -> {
+            config.enableDevLogging();
+            config.enableCorsForAllOrigins();
+        });
 
         //Complaint handlers
         CreateComplaintHandler createComplaintHandler = new CreateComplaintHandler();
