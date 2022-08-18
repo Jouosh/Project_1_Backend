@@ -3,6 +3,7 @@ package dev.martin.app;
 import dev.martin.data.ComplaintDAOPostgres;
 import dev.martin.data.MeetingDAOPostgres;
 import dev.martin.handlers.CreateComplaintHandler;
+import dev.martin.handlers.GetAllMeetingsHandler;
 import dev.martin.service.ComplaintService;
 import dev.martin.service.ComplaintServiceImpl;
 import dev.martin.service.MeetingService;
@@ -27,10 +28,13 @@ public class App {
         CreateComplaintHandler createComplaintHandler = new CreateComplaintHandler();
 
         //Meeting handlers
-
+        GetAllMeetingsHandler getAllMeetingsHandler = new GetAllMeetingsHandler();
 
         //Complaint routes
         app.post("/complaint", createComplaintHandler);
+
+        //Meeting routes
+        app.get("/meeting", getAllMeetingsHandler);
 
         app.start();
 
