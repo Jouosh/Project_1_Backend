@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.martin.smoketests.ConnectionTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-08-17T20:12:02" hostname="DESKTOP-N060D0A" time="0.167">
-  <properties/>
-  <testcase name="connection_available()" classname="dev.martin.smoketests.ConnectionTests" time="0.167"/>
-  <system-out><![CDATA[org.postgresql.jdbc.PgConnection@3daa82be
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
