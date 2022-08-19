@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface MeetingDAO {
 
+    //Create
+    Meeting createMeeting(Meeting meeting);
+
     //Read
     List<Meeting> getAllMeetings();
 
