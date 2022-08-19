@@ -2,6 +2,7 @@ package dev.martin.daotests;
 
 import dev.martin.data.MeetingDAO;
 import dev.martin.data.MeetingDAOPostgres;
+import dev.martin.entities.Meeting;
 import dev.martin.utils.ConnectionUtil;
 import org.junit.jupiter.api.*;
 
@@ -41,8 +42,17 @@ public class MeetingDAOTests {
 
     @Test
     @Order(1)
+    public void create_meeting_test() {
+        Meeting meeting = new Meeting(0,"Gator talk", "My house", 500);
+        Meeting savedMeeting = meetingDAO.createMeeting(meeting);
+        Assertions.assertEquals(1, savedMeeting.getMeetingId());
+    }
+
+    @Test
+    @Order(2)
     public void get_all_meetings_test() {
-        Assertions.assertEquals(0, this.meetingDAO.getAllMeetings().size());
+        meetingDAO.createMeeting(new Meeting(0, "Gators can talk?", "The sewers", 1800));
+        Assertions.assertEquals(2, this.meetingDAO.getAllMeetings().size());
     }
 
     @AfterAll
