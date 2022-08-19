@@ -17,10 +17,12 @@ public class ComplaintServiceImpl implements ComplaintService{
     @Override
     public Complaint registerComplaint(Complaint complaint) {
 
+        //Check that there is a description
         if (complaint.getDescription().length() == 0) {
             throw new RuntimeException("Complaint must have a description");
         }
 
+        //If passed, send to data layer, and return result
         Complaint savedComplaint = complaintDAO.createComplaint(complaint);
 
         return savedComplaint;

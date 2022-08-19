@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface MeetingService {
 
+    //Create
+    Meeting registerMeeting(Meeting meeting);
+
     //Read
     List<Meeting> retrieveAllMeetings();
 }
