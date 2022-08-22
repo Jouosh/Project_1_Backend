@@ -13,6 +13,6 @@ public interface ComplaintDAO {
     List<Complaint> getAllComplaints();
 
     //Update
-    Complaint updateComplaints(Complaint complaint);
+    Complaint updateComplaint(Complaint complaint);
 
 }

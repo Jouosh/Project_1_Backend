@@ -43,7 +43,7 @@ public class ComplaintDAOTests {
                     "\tcomplaint_id serial primary key,\n" +
                     "\tdescription varchar(500) not null,\n" +
                     "\tmeeting int references meeting(meeting_id),\n" +
-                    "\tstatus varchar(10)\n" +
+                    "\tstatus varchar(20)\n" +
                     ");";
             statement.execute(sql);
 
@@ -63,10 +63,20 @@ public class ComplaintDAOTests {
 
     @Test
     @Order(2)
+    void update_complaint_test() {
+        Complaint complaint2 = new Complaint(1, "The toilet gator has made its home in my tub",
+                -1, Status.HIGHPRIORITY);
+        complaintDAO.updateComplaint(complaint2);
+        Complaint updatedComplaint = complaintDAO.getAllComplaints().get(0);
+        Assertions.assertEquals(Status.HIGHPRIORITY, updatedComplaint.getStatus());
+    }
+
+    @Test
+    @Order(3)
     void get_all_complaints_test() {
-         complaintDAO.createComplaint(new Complaint(0, "My pet gator is missing!",
+        complaintDAO.createComplaint(new Complaint(0, "My pet gator is missing!",
                 0, Status.PENDING));
-         List<Complaint> complaintList = complaintDAO.getAllComplaints();
+        List<Complaint> complaintList = complaintDAO.getAllComplaints();
         Assertions.assertEquals(2, complaintList.size());
     }
 
