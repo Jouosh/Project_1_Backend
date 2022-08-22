@@ -30,7 +30,23 @@ public class ComplaintServiceImpl implements ComplaintService{
         return savedComplaint;
     }
 
+    //Read
     @Override
     public List<Complaint> retrieveAllComplaints() { return complaintDAO.getAllComplaints(); }
+
+    //Update
+    @Override
+    public Complaint modifyComplaint(Complaint complaint) {
+
+        //Make sure there's a description
+        if (complaint.getDescription().length() == 0) {
+            throw new RuntimeException("Updated complaint must have a description");
+        }
+
+        //Send to data layer and return result
+        Complaint modifiedComplaint = complaintDAO.updateComplaint(complaint);
+
+        return modifiedComplaint;
+    }
 
 }

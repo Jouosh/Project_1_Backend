@@ -22,4 +22,11 @@ public class ComplaintServiceTests {
         Assertions.assertThrows(RuntimeException.class, () -> complaintService.registerComplaint(complaint));
     }
 
+    @Test
+    public void modified_complaints_must_have_a_description() {
+        Complaint complaint = new Complaint(1, "", -1, Status.PENDING);
+        Mockito.when(complaintDAO.updateComplaint(complaint)).thenReturn(complaint);
+        Assertions.assertThrows(RuntimeException.class, () -> complaintService.modifyComplaint(complaint));
+    }
+
 }
