@@ -34,6 +34,9 @@ public class ComplaintServiceImpl implements ComplaintService{
     @Override
     public List<Complaint> retrieveAllComplaints() { return complaintDAO.getAllComplaints(); }
 
+    @Override
+    public Complaint retrieveComplaintById(int id) { return complaintDAO.getComplaintById(id); }
+
     //Update
     @Override
     public Complaint modifyComplaint(Complaint complaint) {

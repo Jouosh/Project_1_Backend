@@ -11,6 +11,7 @@ public interface ComplaintService {
 
     //Read
     List<Complaint> retrieveAllComplaints();
+    Complaint retrieveComplaintById(int id);
 
     //Update
     Complaint modifyComplaint(Complaint complaint);

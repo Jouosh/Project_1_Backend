@@ -26,6 +26,7 @@ public class App {
         //Complaint handlers
         CreateComplaintHandler createComplaintHandler = new CreateComplaintHandler();
         GetAllComplaintsHandler getAllComplaintsHandler = new GetAllComplaintsHandler();
+        GetComplaintByIdHandler getComplaintByIdHandler = new GetComplaintByIdHandler();
         UpdateComplaintHandler updateComplaintHandler = new UpdateComplaintHandler();
 
         //Meeting handlers
@@ -35,6 +36,7 @@ public class App {
         //Complaint routes
         app.post("/complaints", createComplaintHandler);
         app.get("/complaints", getAllComplaintsHandler);
+        app.get("/complaints/{id}", getComplaintByIdHandler);
         app.put("/complaints/{id}", updateComplaintHandler);
 
         //Meeting routes
