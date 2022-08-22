@@ -62,6 +62,7 @@ public class ComplaintDAOPostgres implements ComplaintDAO {
                 complaintList.add(complaint);
             }
 
+            //return completed list
             return  complaintList;
 
         } catch (SQLException e) {
