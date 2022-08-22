@@ -3,6 +3,8 @@ package dev.martin.service;
 import dev.martin.data.ComplaintDAO;
 import dev.martin.entities.Complaint;
 
+import java.util.List;
+
 public class ComplaintServiceImpl implements ComplaintService{
 
     //Connection to data layer
@@ -27,4 +29,8 @@ public class ComplaintServiceImpl implements ComplaintService{
 
         return savedComplaint;
     }
+
+    @Override
+    public List<Complaint> retrieveAllComplaints() { return complaintDAO.getAllComplaints(); }
+
 }
