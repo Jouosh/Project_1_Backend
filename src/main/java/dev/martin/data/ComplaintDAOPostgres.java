@@ -71,4 +71,9 @@ public class ComplaintDAOPostgres implements ComplaintDAO {
 
         return null;
     }
+
+    @Override
+    public Complaint updateComplaints(Complaint complaint) {
+        return null;
+    }
 }

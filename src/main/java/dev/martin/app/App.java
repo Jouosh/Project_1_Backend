@@ -35,12 +35,12 @@ public class App {
         GetAllMeetingsHandler getAllMeetingsHandler = new GetAllMeetingsHandler();
 
         //Complaint routes
-        app.post("/complaint", createComplaintHandler);
-        app.get("/complaint", getAllComplaintsHandler);
+        app.post("/complaints", createComplaintHandler);
+        app.get("/complaints", getAllComplaintsHandler);
 
         //Meeting routes
-        app.post("/meeting", createMeetingHandler);
-        app.get("/meeting", getAllMeetingsHandler);
+        app.post("/meetings", createMeetingHandler);
+        app.get("/meetings", getAllMeetingsHandler);
 
         app.start();
 

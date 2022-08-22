@@ -12,4 +12,7 @@ public interface ComplaintDAO {
     //Read
     List<Complaint> getAllComplaints();
 
+    //Update
+    Complaint updateComplaints(Complaint complaint);
+
 }

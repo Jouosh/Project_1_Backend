@@ -20,7 +20,7 @@ public class MeetingDAOPostgres implements MeetingDAO {
             PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1,meeting.getDescription());
             preparedStatement.setString(2, meeting.getPlace());
-            preparedStatement.setInt(3, meeting.getTime());
+            preparedStatement.setLong(3, meeting.getTime());
 
             //Execute and get generated id
             preparedStatement.execute();
@@ -60,7 +60,7 @@ public class MeetingDAOPostgres implements MeetingDAO {
                 meeting.setMeetingId(resultSet.getInt("meeting_id"));
                 meeting.setDescription(resultSet.getString("description"));
                 meeting.setPlace(resultSet.getString("place"));
-                meeting.setTime(resultSet.getInt("time"));
+                meeting.setTime(resultSet.getLong("time"));
                 meetingList.add(meeting);
             }
 
