@@ -5,6 +5,8 @@ import dev.martin.entities.Status;
 import dev.martin.utils.ConnectionUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ComplaintDAOPostgres implements ComplaintDAO {
 
@@ -36,6 +38,36 @@ public class ComplaintDAOPostgres implements ComplaintDAO {
         } catch(SQLException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    @Override
+    public List<Complaint> getAllComplaints() {
+
+        try (Connection conn = ConnectionUtil.createConnection()) {
+
+            //Get all complaints from database and put into result set
+            String sql = "select * from complaint";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            //convert result set into complaint instances and put into list
+            List<Complaint> complaintList = new ArrayList();
+            while (resultSet.next()) {
+                Complaint complaint = new Complaint();
+                complaint.setComplaintId(resultSet.getInt("complaint_id"));
+                complaint.setDescription(resultSet.getString("description"));
+                complaint.setMeeting(resultSet.getInt("meeting"));
+                complaint.setStatus(Status.valueOf(resultSet.getString("status")));
+                complaintList.add(complaint);
+            }
+
+            return  complaintList;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 }

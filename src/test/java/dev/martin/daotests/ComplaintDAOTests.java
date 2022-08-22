@@ -10,6 +10,7 @@ import org.junit.jupiter.api.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ComplaintDAOTests {
@@ -58,7 +59,16 @@ public class ComplaintDAOTests {
                 0, Status.PENDING);
         Complaint savedComplaint = complaintDAO.createComplaint(complaint);
         Assertions.assertNotEquals(0, savedComplaint.getComplaintId());
-    };
+    }
+
+    @Test
+    @Order(2)
+    void get_all_complaints_test() {
+         complaintDAO.createComplaint(new Complaint(0, "My pet gator is missing!",
+                0, Status.PENDING));
+         List<Complaint> complaintList = complaintDAO.getAllComplaints();
+        Assertions.assertEquals(2, complaintList.size());
+    }
 
     @AfterAll
     static void teardown() {
