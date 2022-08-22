@@ -63,21 +63,28 @@ public class ComplaintDAOTests {
 
     @Test
     @Order(2)
-    void update_complaint_test() {
-        Complaint complaint2 = new Complaint(1, "The toilet gator has made its home in my tub",
-                -1, Status.HIGHPRIORITY);
-        complaintDAO.updateComplaint(complaint2);
-        Complaint updatedComplaint = complaintDAO.getAllComplaints().get(0);
-        Assertions.assertEquals(Status.HIGHPRIORITY, updatedComplaint.getStatus());
-    }
-
-    @Test
-    @Order(3)
     void get_all_complaints_test() {
         complaintDAO.createComplaint(new Complaint(0, "My pet gator is missing!",
                 0, Status.PENDING));
         List<Complaint> complaintList = complaintDAO.getAllComplaints();
         Assertions.assertEquals(2, complaintList.size());
+    }
+
+    @Test
+    @Order(3)
+    void get_complaint_by_id_test() {
+        Complaint complaint = complaintDAO.getComplaintById(1);
+        Assertions.assertEquals(Status.PENDING, complaint.getStatus());
+    }
+
+    @Test
+    @Order(4)
+    void update_complaint_test() {
+        Complaint complaint2 = new Complaint(1, "The toilet gator has made its home in my tub",
+                -1, Status.HIGHPRIORITY);
+        complaintDAO.updateComplaint(complaint2);
+        Complaint updatedComplaint = complaintDAO.getComplaintById(1);
+        Assertions.assertEquals(Status.HIGHPRIORITY, updatedComplaint.getStatus());
     }
 
     @AfterAll

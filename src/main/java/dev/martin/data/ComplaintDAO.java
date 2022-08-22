@@ -10,6 +10,8 @@ public interface ComplaintDAO {
     Complaint createComplaint(Complaint complaint);
 
     //Read
+    Complaint getComplaintById(int id);
+
     List<Complaint> getAllComplaints();
 
     //Update
