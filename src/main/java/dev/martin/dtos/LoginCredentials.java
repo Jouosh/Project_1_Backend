@@ -1,7 +1,5 @@
 package dev.martin.dtos;
 
-//A Data Transfer Object(DTO) is designed just to be a vessel to hold a JSON going from frontend to backend
-//minimal logic, not saved to a database
 public class LoginCredentials {
 
     private String username;

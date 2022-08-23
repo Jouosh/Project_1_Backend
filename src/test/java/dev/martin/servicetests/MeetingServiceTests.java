@@ -3,8 +3,8 @@ package dev.martin.servicetests;
 
 import dev.martin.data.MeetingDAO;
 import dev.martin.entities.Meeting;
-import dev.martin.service.MeetingService;
-import dev.martin.service.MeetingServiceImpl;
+import dev.martin.services.MeetingService;
+import dev.martin.services.MeetingServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

@@ -1,4 +1,4 @@
-package dev.martin.service;
+package dev.martin.services;
 
 import dev.martin.entities.Complaint;
 

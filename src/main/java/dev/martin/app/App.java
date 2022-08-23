@@ -3,10 +3,10 @@ package dev.martin.app;
 import dev.martin.data.ComplaintDAOPostgres;
 import dev.martin.data.MeetingDAOPostgres;
 import dev.martin.handlers.*;
-import dev.martin.service.ComplaintService;
-import dev.martin.service.ComplaintServiceImpl;
-import dev.martin.service.MeetingService;
-import dev.martin.service.MeetingServiceImpl;
+import dev.martin.services.ComplaintService;
+import dev.martin.services.ComplaintServiceImpl;
+import dev.martin.services.MeetingService;
+import dev.martin.services.MeetingServiceImpl;
 import io.javalin.Javalin;
 
 public class App {

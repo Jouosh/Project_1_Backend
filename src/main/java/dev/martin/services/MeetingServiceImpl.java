@@ -1,4 +1,4 @@
-package dev.martin.service;
+package dev.martin.services;
 
 import dev.martin.data.MeetingDAO;
 import dev.martin.entities.Meeting;
