@@ -12,7 +12,7 @@ public class GetComplaintByIdHandler implements Handler {
     @Override
     public void handle(@NotNull Context ctx) throws Exception {
 
-        //get id from pathparam, and try to get complaint by id with it
+        //get id from path param, and try to get complaint by id with it
         int id = Integer.parseInt(ctx.pathParam("id"));
         Complaint complaint = App.complaintService.retrieveComplaintById(id);
 
@@ -25,6 +25,7 @@ public class GetComplaintByIdHandler implements Handler {
         else {
             Gson gson = new Gson();
             String outJson = gson.toJson(complaint);
+            ctx.status(200);
             ctx.result(outJson);
         }
 
