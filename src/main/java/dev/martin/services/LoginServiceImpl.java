@@ -2,12 +2,14 @@ package dev.martin.services;
 
 import dev.martin.data.TownspersonDAO;
 import dev.martin.entities.Townsperson;
+import dev.martin.exceptions.NoTownspersonFoundException;
+import dev.martin.exceptions.PasswordMismatchException;
 
 public class LoginServiceImpl implements LoginService {
 
     private TownspersonDAO townspersonDAO;
 
-    public LoginServiceImpl(TownspersonDAO employeeDAO) {
+    public LoginServiceImpl(TownspersonDAO townspersonDAO) {
         this.townspersonDAO = townspersonDAO;
     }
 
@@ -17,11 +19,11 @@ public class LoginServiceImpl implements LoginService {
         Townsperson townsperson = this.townspersonDAO.getTownspersonByUsername(username);
 
         if (townsperson == null) {
-            throw new RuntimeException("No employee found with username" + username);
+            throw new NoTownspersonFoundException("No employee found with username" + username);
         }
 
         if (!townsperson.getPassword().equals(password)) {
-            throw new RuntimeException("Password does not match database");
+            throw new PasswordMismatchException("Password does not match database");
         }
         return townsperson;
     }
