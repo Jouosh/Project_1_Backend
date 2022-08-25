@@ -2,6 +2,7 @@ package dev.martin.daotests;
 
 import dev.martin.data.TownspersonDAO;
 import dev.martin.data.TownspersonDAOPostrgres;
+import dev.martin.entities.Role;
 import dev.martin.entities.Townsperson;
 import dev.martin.utils.ConnectionUtil;
 import org.junit.jupiter.api.*;
@@ -45,13 +46,22 @@ public class TownspersonDAOTests {
 
     @Test
     @Order(1)
+    void create_townsperson_test() {
+        Townsperson townsperson = new Townsperson(1, "Jimber", "passy",
+                Role.CONSTITUENT, false);
+        Townsperson savedTownsperson = townspersonDAO.createTownsperson(townsperson);
+        Assertions.assertNotEquals(1, savedTownsperson.getTownId());
+    }
+
+    @Test
+    @Order(2)
     void get_townsperson_by_username_test() {
         Townsperson townsperson = townspersonDAO.getTownspersonByUsername("Jooosh");
         Assertions.assertEquals("fakePassword123", townsperson.getPassword());
     }
 
     @Test
-    @Order(2)
+    @Order(3)
     void get_townspersons_by_approval_test() {
         List<Townsperson> townspeople = townspersonDAO.getTownspersonsByApproval(true);
         Assertions.assertEquals(1, townspeople.size());

@@ -6,14 +6,42 @@ import dev.martin.entities.Status;
 import dev.martin.entities.Townsperson;
 import dev.martin.utils.ConnectionUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TownspersonDAOPostrgres implements TownspersonDAO{
+
+    @Override
+    public Townsperson createTownsperson(Townsperson townsperson) {
+
+        try (Connection conn = ConnectionUtil.createConnection()) {
+
+            //Create prepared statement and fill in blanks
+            String sql = "insert into townsperson values (default, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1,townsperson.getUsername());
+            preparedStatement.setString(2, townsperson.getPassword());
+            preparedStatement.setString(3, townsperson.getRole().toString());
+            preparedStatement.setBoolean(4, townsperson.isApproved());
+
+            //Execute and get generated id
+            preparedStatement.execute();
+            ResultSet keys = preparedStatement.getGeneratedKeys();
+            keys.next();
+            int generatedKey = keys.getInt("town_id");
+
+            //Set meetingId and return meeting
+            townsperson.setTownId(generatedKey);
+            return townsperson;
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
 
     @Override
     public Townsperson getTownspersonByUsername(String username) {

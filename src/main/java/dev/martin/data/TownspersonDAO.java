@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface TownspersonDAO {
 
+    //Create
+    Townsperson createTownsperson(Townsperson townsperson);
+
     //Read
     Townsperson getTownspersonByUsername(String username);
     List<Townsperson> getTownspersonsByApproval(boolean approved);
