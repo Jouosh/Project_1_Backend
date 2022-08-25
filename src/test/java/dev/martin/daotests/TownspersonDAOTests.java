@@ -4,15 +4,14 @@ import dev.martin.data.TownspersonDAO;
 import dev.martin.data.TownspersonDAOPostrgres;
 import dev.martin.entities.Townsperson;
 import dev.martin.utils.ConnectionUtil;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TownspersonDAOTests {
 
     static TownspersonDAO townspersonDAO = new TownspersonDAOPostrgres();
@@ -27,7 +26,8 @@ public class TownspersonDAOTests {
                     "town_id serial primary key,\n" +
                     "username varchar(20) unique,\n" +
                     "password varchar(20),\n" +
-                    "role varchar(20)\n" +
+                    "role varchar(20),\n" +
+                    "approved boolean\n" +
                     ");";
 
             //create a statement, and have it execute the sql string
@@ -35,7 +35,7 @@ public class TownspersonDAOTests {
             statement.execute(sql);
 
             //insert default townsperson
-            sql = "insert into townsperson values (default, 'Jooosh','fakePassword123', 'COUNCIL');";
+            sql = "insert into townsperson values (default, 'Jooosh','fakePassword123', 'COUNCIL', true);";
             statement.execute(sql);
 
         } catch (SQLException e) {
@@ -44,9 +44,17 @@ public class TownspersonDAOTests {
     }
 
     @Test
+    @Order(1)
     void get_townsperson_by_username_test() {
         Townsperson townsperson = townspersonDAO.getTownspersonByUsername("Jooosh");
         Assertions.assertEquals("fakePassword123", townsperson.getPassword());
+    }
+
+    @Test
+    @Order(2)
+    void get_townspersons_by_approval_test() {
+        List<Townsperson> townspeople = townspersonDAO.getTownspersonsByApproval(true);
+        Assertions.assertEquals(1, townspeople.size());
     }
 
     @AfterAll

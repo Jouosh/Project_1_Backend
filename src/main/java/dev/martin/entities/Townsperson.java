@@ -6,15 +6,18 @@ public class Townsperson {
     private String username;
     private String password;
     private Role role;
+    private boolean approved;
 
     public Townsperson() {
+
     }
 
-    public Townsperson(int townId, String username, String password, Role role) {
+    public Townsperson(int townId, String username, String password, Role role, boolean approved) {
         this.townId = townId;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.approved = approved;
     }
 
     public int getTownId() {
@@ -49,6 +52,14 @@ public class Townsperson {
         this.role = role;
     }
 
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
     @Override
     public String toString() {
         return "Townsperson{" +
@@ -56,6 +67,7 @@ public class Townsperson {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
+                ", approved=" + approved +
                 '}';
     }
 }

@@ -24,7 +24,8 @@ public class LoginServiceTests {
 
     @Test
     public void logins_must_have_a_matching_password() {
-        Townsperson townsperson = new Townsperson(1, "Jimmyyum", "Jimspass", Role.CONSTITUENT);
+        Townsperson townsperson = new Townsperson(1, "Jimmyyum", "Jimspass",
+                Role.CONSTITUENT, true);
         Mockito.when(townspersonDAO.getTownspersonByUsername("Jimmyyum")).thenReturn(townsperson);
         Assertions.assertThrows(RuntimeException.class,
                 () -> loginService.validate_user("Jimmyyyum", "Jimssssspass"));

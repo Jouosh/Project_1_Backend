@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TownspersonDAOPostrgres implements TownspersonDAO{
 
@@ -31,6 +33,7 @@ public class TownspersonDAOPostrgres implements TownspersonDAO{
             townsperson.setUsername(resultSet.getString("username"));
             townsperson.setPassword(resultSet.getString("password"));
             townsperson.setRole(Role.valueOf(resultSet.getString("role")));
+            townsperson.setApproved(resultSet.getBoolean("approved"));
 
             //return selected townsperson
             return townsperson;
@@ -41,5 +44,39 @@ public class TownspersonDAOPostrgres implements TownspersonDAO{
 
         return null;
 
+    }
+
+    @Override
+    public List<Townsperson> getTownspersonsByApproval(boolean approved) {
+
+        try (Connection conn = ConnectionUtil.createConnection()) {
+
+            //Prepare statement, and fill in blank with id
+            String sql = "select * from townsperson where approved = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setBoolean(1, approved);
+
+            List<Townsperson> townspeople = new ArrayList();
+
+            //Put results into result set, then into a townsperson object
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Townsperson townsperson = new Townsperson();
+                townsperson.setTownId(resultSet.getInt("town_id"));
+                townsperson.setUsername(resultSet.getString("username"));
+                townsperson.setPassword(resultSet.getString("password"));
+                townsperson.setRole(Role.valueOf(resultSet.getString("role")));
+                townsperson.setApproved(resultSet.getBoolean("approved"));
+                townspeople.add(townsperson);
+            }
+
+            //return selected townsperson
+            return townspeople;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
