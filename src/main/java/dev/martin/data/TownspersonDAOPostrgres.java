@@ -108,4 +108,30 @@ public class TownspersonDAOPostrgres implements TownspersonDAO{
 
         return null;
     }
+
+    @Override
+    public Townsperson updateTownsperson(Townsperson townsperson) {
+
+        try (Connection conn = ConnectionUtil.createConnection()) {
+
+            //Create and prepare SQL statement
+            String sql = "update townsperson set username = ?, password = ?, role = ?, approved = ? where town_id = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+            //Fill in the blanks with townspersons info
+            preparedStatement.setString(1, townsperson.getUsername());
+            preparedStatement.setString(2, townsperson.getPassword());
+            preparedStatement.setString(3, townsperson.getRole().toString());
+            preparedStatement.setBoolean(4, townsperson.isApproved());
+            preparedStatement.setInt(5, townsperson.getTownId());
+
+            //Execute update and return townsperson
+            preparedStatement.executeUpdate();
+            return townsperson;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

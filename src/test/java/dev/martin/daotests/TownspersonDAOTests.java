@@ -62,9 +62,19 @@ public class TownspersonDAOTests {
 
     @Test
     @Order(3)
+    void update_townsperson_test() {
+        Townsperson townsperson2 = new Townsperson(2, "Jimber", "passy",
+                Role.CONSTITUENT, true);
+        townspersonDAO.updateTownsperson(townsperson2);
+        Townsperson updatedTownsperson = townspersonDAO.getTownspersonByUsername("Jimber");
+        Assertions.assertEquals(true, updatedTownsperson.isApproved());
+    }
+
+    @Test
+    @Order(4)
     void get_townspersons_by_approval_test() {
         List<Townsperson> townspeople = townspersonDAO.getTownspeopleByApproval(true);
-        Assertions.assertEquals(1, townspeople.size());
+        Assertions.assertEquals(2, townspeople.size());
     }
 
     @AfterAll
