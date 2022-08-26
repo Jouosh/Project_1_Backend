@@ -63,7 +63,7 @@ public class TownspersonDAOTests {
     @Test
     @Order(3)
     void get_townspersons_by_approval_test() {
-        List<Townsperson> townspeople = townspersonDAO.getTownspersonsByApproval(true);
+        List<Townsperson> townspeople = townspersonDAO.getTownspeopleByApproval(true);
         Assertions.assertEquals(1, townspeople.size());
     }
 

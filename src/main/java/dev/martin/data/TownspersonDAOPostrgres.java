@@ -55,16 +55,17 @@ public class TownspersonDAOPostrgres implements TownspersonDAO{
 
             //Put results into result set, then into a townsperson object
             ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            Townsperson townsperson = new Townsperson();
-            townsperson.setTownId(resultSet.getInt("town_id"));
-            townsperson.setUsername(resultSet.getString("username"));
-            townsperson.setPassword(resultSet.getString("password"));
-            townsperson.setRole(Role.valueOf(resultSet.getString("role")));
-            townsperson.setApproved(resultSet.getBoolean("approved"));
-
-            //return selected townsperson
-            return townsperson;
+            if (resultSet.next()) {
+                Townsperson townsperson = new Townsperson();
+                townsperson.setTownId(resultSet.getInt("town_id"));
+                townsperson.setUsername(resultSet.getString("username"));
+                townsperson.setPassword(resultSet.getString("password"));
+                townsperson.setRole(Role.valueOf(resultSet.getString("role")));
+                townsperson.setApproved(resultSet.getBoolean("approved"));
+                return townsperson;
+            } else {
+                return null;
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,7 +76,7 @@ public class TownspersonDAOPostrgres implements TownspersonDAO{
     }
 
     @Override
-    public List<Townsperson> getTownspersonsByApproval(boolean approved) {
+    public List<Townsperson> getTownspeopleByApproval(boolean approved) {
 
         try (Connection conn = ConnectionUtil.createConnection()) {
 

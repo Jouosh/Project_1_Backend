@@ -4,6 +4,8 @@ import dev.martin.data.TownspersonDAO;
 import dev.martin.entities.Townsperson;
 import dev.martin.exceptions.UsernameAlreadyInUseException;
 
+import java.util.List;
+
 public class TownspersonServiceImpl implements TownspersonService{
 
     //Connection to data layer
@@ -31,5 +33,10 @@ public class TownspersonServiceImpl implements TownspersonService{
 
         Townsperson savedTownsperson = townspersonDAO.createTownsperson(townsperson);
         return savedTownsperson;
+    }
+
+    @Override
+    public List<Townsperson> retrieveTownspeopleByApproval(boolean approval) {
+        return townspersonDAO.getTownspeopleByApproval(approval);
     }
 }

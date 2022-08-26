@@ -11,6 +11,6 @@ public interface TownspersonDAO {
 
     //Read
     Townsperson getTownspersonByUsername(String username);
-    List<Townsperson> getTownspersonsByApproval(boolean approved);
+    List<Townsperson> getTownspeopleByApproval(boolean approved);
 
 }
