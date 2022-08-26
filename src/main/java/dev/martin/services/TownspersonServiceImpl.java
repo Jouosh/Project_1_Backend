@@ -39,4 +39,19 @@ public class TownspersonServiceImpl implements TownspersonService{
     public List<Townsperson> retrieveTownspeopleByApproval(boolean approval) {
         return townspersonDAO.getTownspeopleByApproval(approval);
     }
+
+    @Override
+    public Townsperson modifyTownsperson(Townsperson townsperson) {
+
+        if (townsperson.getUsername().length() <= 3) {
+            throw new RuntimeException("Username is too short");
+        }
+
+        if (townsperson.getPassword().length() <= 3) {
+            throw new RuntimeException("Password is too short");
+        }
+
+        Townsperson savedTownsperson = townspersonDAO.updateTownsperson(townsperson);
+        return savedTownsperson;
+    }
 }

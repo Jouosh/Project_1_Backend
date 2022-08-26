@@ -15,7 +15,7 @@ public class UpdateComplaintHandler implements Handler {
         //Get id from path
         int id = Integer.parseInt(ctx.pathParam("id"));
 
-        //convert json into employee, set id to match with path
+        //convert json into complaint, set id to match with path
         String inJson = ctx.body();
         Gson gson = new Gson();
         Complaint complaint = gson.fromJson(inJson, Complaint.class);

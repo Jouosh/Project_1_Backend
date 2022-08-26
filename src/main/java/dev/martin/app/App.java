@@ -42,6 +42,7 @@ public class App {
         //Townsperson handlers
         CreateTownspersonHandler createTownspersonHandler = new CreateTownspersonHandler();
         GetTownspeopleByApprovalHandler getTownspeopleByApprovalHandler = new GetTownspeopleByApprovalHandler();
+        UpdateTownspersonHandler updateTownspersonHandler = new UpdateTownspersonHandler();
 
         //Complaint routes
         app.post("/complaints", createComplaintHandler);
@@ -59,6 +60,7 @@ public class App {
         //Townsperson routes
         app.post("/townspeople", createTownspersonHandler);
         app.get("/townspeople/{approval}", getTownspeopleByApprovalHandler);
+        app.put("/townspeople/{id}", updateTownspersonHandler);
 
         //Login exceptions
         app.exception(PasswordMismatchException.class, (exception, ctx) -> {
@@ -68,7 +70,7 @@ public class App {
 
         app.exception(NoTownspersonFoundException.class, (exception, ctx) -> {
             ctx.status(404);
-            ctx.result("No employee found: " + exception.getMessage());
+            ctx.result("No townsperson found: " + exception.getMessage());
         });
 
         //Townsperson Exception
