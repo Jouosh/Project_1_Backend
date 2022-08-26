@@ -5,6 +5,7 @@ import dev.martin.data.MeetingDAOPostgres;
 import dev.martin.data.TownspersonDAOPostrgres;
 import dev.martin.exceptions.NoTownspersonFoundException;
 import dev.martin.exceptions.PasswordMismatchException;
+import dev.martin.exceptions.UsernameAlreadyInUseException;
 import dev.martin.handlers.*;
 import dev.martin.services.*;
 import io.javalin.Javalin;
@@ -15,6 +16,7 @@ public class App {
     public static ComplaintService complaintService = new ComplaintServiceImpl(new ComplaintDAOPostgres());
     public static MeetingService meetingService = new MeetingServiceImpl(new MeetingDAOPostgres());
     public static LoginService loginService = new LoginServiceImpl(new TownspersonDAOPostrgres());
+    public static TownspersonService townspersonService = new TownspersonServiceImpl(new TownspersonDAOPostrgres());
 
     public static void main(String args[]) {
 
@@ -37,6 +39,9 @@ public class App {
         //Login handler
         LoginHandler loginHandler = new LoginHandler();
 
+        //Townsperson handlers
+        CreateTownspersonHandler createTownspersonHandler = new CreateTownspersonHandler();
+
         //Complaint routes
         app.post("/complaints", createComplaintHandler);
         app.get("/complaints", getAllComplaintsHandler);
@@ -50,6 +55,9 @@ public class App {
         //Login route
         app.post("/login", loginHandler);
 
+        //Townsperson routes
+        app.post("/townspeople", createTownspersonHandler);
+
         //Login exceptions
         app.exception(PasswordMismatchException.class, (exception, ctx) -> {
             ctx.status(400);
@@ -59,6 +67,12 @@ public class App {
         app.exception(NoTownspersonFoundException.class, (exception, ctx) -> {
             ctx.status(404);
             ctx.result("No employee found: " + exception.getMessage());
+        });
+
+        //Townsperson Exception
+        app.exception(UsernameAlreadyInUseException.class, (exception, ctx) -> {
+            ctx.status(400);
+            ctx.result(exception.getMessage());
         });
 
         app.start();
