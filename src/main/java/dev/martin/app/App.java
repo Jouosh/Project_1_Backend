@@ -41,6 +41,7 @@ public class App {
 
         //Townsperson handlers
         CreateTownspersonHandler createTownspersonHandler = new CreateTownspersonHandler();
+        GetTownspeopleByApprovalHandler getTownspeopleByApprovalHandler = new GetTownspeopleByApprovalHandler();
 
         //Complaint routes
         app.post("/complaints", createComplaintHandler);
@@ -57,6 +58,7 @@ public class App {
 
         //Townsperson routes
         app.post("/townspeople", createTownspersonHandler);
+        app.get("/townspeople/{approval}", getTownspeopleByApprovalHandler);
 
         //Login exceptions
         app.exception(PasswordMismatchException.class, (exception, ctx) -> {
