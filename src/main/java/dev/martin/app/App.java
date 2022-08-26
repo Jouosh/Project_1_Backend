@@ -41,6 +41,7 @@ public class App {
 
         //Townsperson handlers
         CreateTownspersonHandler createTownspersonHandler = new CreateTownspersonHandler();
+        GetTownspersonByUsernameHandler getTownspersonByUsernameHandler = new GetTownspersonByUsernameHandler();
         GetTownspeopleByApprovalHandler getTownspeopleByApprovalHandler = new GetTownspeopleByApprovalHandler();
         UpdateTownspersonHandler updateTownspersonHandler = new UpdateTownspersonHandler();
 
@@ -59,6 +60,7 @@ public class App {
 
         //Townsperson routes
         app.post("/townspeople", createTownspersonHandler);
+        app.get("/townspeople/{username}", getTownspersonByUsernameHandler);
         app.get("/townspeople/{approval}", getTownspeopleByApprovalHandler);
         app.put("/townspeople/{id}", updateTownspersonHandler);
 
