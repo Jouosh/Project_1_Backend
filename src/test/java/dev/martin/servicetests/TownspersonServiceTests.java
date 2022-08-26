@@ -44,4 +44,12 @@ public class TownspersonServiceTests {
                 () -> townspersonService.registerTownsperson(townsperson));
     }
 
+    @Test
+    public void logins_must_have_a_valid_username() {
+        Mockito.when(townspersonDAO.getTownspersonByUsername("Jimmyyyum")).thenReturn(null);
+        Assertions.assertThrows(RuntimeException.class,
+                () -> townspersonService.retrieveTownspersonByUsername("Jimmyyyum"));
+    }
+
+
 }

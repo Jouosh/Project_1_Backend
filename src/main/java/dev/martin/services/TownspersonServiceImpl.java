@@ -2,6 +2,7 @@ package dev.martin.services;
 
 import dev.martin.data.TownspersonDAO;
 import dev.martin.entities.Townsperson;
+import dev.martin.exceptions.NoTownspersonFoundException;
 import dev.martin.exceptions.UsernameAlreadyInUseException;
 
 import java.util.List;
@@ -33,6 +34,18 @@ public class TownspersonServiceImpl implements TownspersonService{
 
         Townsperson savedTownsperson = townspersonDAO.createTownsperson(townsperson);
         return savedTownsperson;
+    }
+
+    @Override
+    public Townsperson retrieveTownspersonByUsername(String username) {
+
+        Townsperson townsperson = this.townspersonDAO.getTownspersonByUsername(username);
+
+        if (townsperson == null) {
+            throw new NoTownspersonFoundException("No employee found with username" + username);
+        }
+
+        return townsperson;
     }
 
     @Override

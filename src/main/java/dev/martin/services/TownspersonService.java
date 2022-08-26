@@ -10,6 +10,7 @@ public interface TownspersonService {
     Townsperson registerTownsperson(Townsperson townsperson);
 
     //Read
+    Townsperson retrieveTownspersonByUsername(String username);
     List<Townsperson> retrieveTownspeopleByApproval(boolean approval);
 
     //Update
